@@ -19,10 +19,23 @@ class SignalElement extends HTMLElement {
     }
 
     const observers = this.querySelectorAll("ce-observer");
-    createEffect(() => {
+    createEffect((prev) => {
+      const updatedValue = getter();
       for (const observer of observers) {
         const selector = observer.getAttribute("selector");
-        document.querySelector(selector).value = getter();
+        const subject = document.querySelector(selector);
+        if (observer.hasAttribute("property")) {
+          const property = observer.getAttribute("property");
+          subject[property] = updatedValue;
+        } else if (observer.hasAttribute("action")) {
+          const action = observer.getAttribute("action");
+          const isVoid = observer.hasAttribute("void");
+          if (isVoid) {
+            subject[action]();
+          } else {
+            subject[action](updatedValue);
+          }
+        }
       }
     });
   }
