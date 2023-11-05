@@ -59,5 +59,6 @@ Data fetching and page fragment replacement.
 ## How to publish
 
 ```sh
+npm version patch
 npm publish --access=public
 ```
