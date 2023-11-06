@@ -50,6 +50,14 @@ Data fetching and page fragment replacement.
 </button>
 ```
 
+### h.js
+
+Shorthand for Document.createElement.
+
+```js
+document.body.appendChild(h.h1({ style: "color:hotpink" }, "Hello"));
+```
+
 ## How to install
 
 ```html

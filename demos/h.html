@@ -1,0 +1,9 @@
+<body>
+  <script type="module">
+    import h from "../h.js";
+    document.body.appendChild(h.h1({ style: "color:hotpink" }, "Hello"));
+    document.body.appendChild(
+      h.div({ style: "border:solid black 1px" }, h.pre("Hey")),
+    );
+  </script>
+</body>
