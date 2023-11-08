@@ -9,23 +9,26 @@ A collection of Custom Elements related utilities for building webapp without bu
 A wrapper of Solid.js to provide reactivity across elements via signals.
 
 ```html
-<!-- initial "checked" is meant to be rendered by server -->
-<input type="radio" name="tabs" value="foo" checked id="foo" />
-<label for="foo">Foo</label>
-<input type="radio" name="tabs" value="bar" id="bar" />
-<label for="bar">Bar</label>
+<!-- initial values are meant to be rendered by server -->
+<div id="controlId">
+  <input type="radio" name="tabs" value="foo" checked id="foo" />
+  <label for="foo">Foo</label>
+  <input type="radio" name="tabs" value="bar" id="bar" />
+  <label for="bar">Bar</label>
+</div>
 
-<!-- initial "value" is meant to be rendered by server -->
-<input type="text" name="status" value="foo" readonly />
-<input type="text" name="status2" value="foo" readonly />
+<input id="inputId" type="text" name="status" value="foo" readonly />
 
-<!-- "init" is meant to be rendered by server -->
 <ce-signal init="foo">
-  <ce-listener event="change" name="tabs"></ce-listener>
-  <ce-observer selector="input[name=status]" property="value"></ce-observer>
-  <ce-observer selector="input[name=status2]" property="value"></ce-observer>
-  <ce-observer selector="div#blah" property="textContent"></ce-observer>
-  <ce-observer selector="form#hoge" action="requestSubmit" void></ce-observer>
+  <ce-listener
+    for="controlId"
+    event="change"
+    property="value"
+    target
+  ></ce-listener>
+  <ce-observer for="inputId" property="value"></ce-observer>
+  <ce-observer for="divId" property="textContent"></ce-observer>
+  <ce-observer for="formId" action="requestSubmit" void></ce-observer>
 </ce-signal>
 ```
 

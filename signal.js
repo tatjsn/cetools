@@ -11,19 +11,21 @@ class SignalElement extends HTMLElement {
     for (const listener of listeners) {
       const event = listener.getAttribute("event");
       const name = listener.getAttribute("name");
-      document.addEventListener(event, (event) => {
-        if (event.target.name === name) {
-          setter(event.target.value);
-        }
+      const forAttr = listener.getAttribute("for");
+      const hasTarget = listener.hasAttribute("target");
+      const property = listener.getAttribute("property");
+      document.getElementById(forAttr).addEventListener(event, (event) => {
+        const subject = hasTarget ? event.target : event;
+        setter(subject[property]);
       });
     }
 
     const observers = this.querySelectorAll("ce-observer");
-    createEffect((prev) => {
+    createEffect(() => {
       const updatedValue = getter();
       for (const observer of observers) {
-        const selector = observer.getAttribute("selector");
-        const subject = document.querySelector(selector);
+        const forAttr = observer.getAttribute("for");
+        const subject = document.getElementById(forAttr);
         if (observer.hasAttribute("property")) {
           const property = observer.getAttribute("property");
           subject[property] = updatedValue;

@@ -1,0 +1,21 @@
+<body>
+  <script type="module" src="../signal.js"></script>
+  <div id="tabs">
+    <input type="radio" name="tabs" value="foo" checked id="foo" />
+    <label for="foo">Foo</label>
+    <input type="radio" name="tabs" value="bar" id="bar" />
+    <label for="bar">Bar</label>
+  </div>
+
+  <input id="result" type="text" name="status" value="foo" readonly />
+
+  <ce-signal init="foo">
+    <ce-listener
+      event="change"
+      for="tabs"
+      target
+      property="value"
+    ></ce-listener>
+    <ce-observer for="result" property="value"></ce-observer>
+  </ce-signal>
+</body>
