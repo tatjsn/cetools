@@ -1,9 +1,6 @@
 import { createSignal, createEffect } from "https://cdn.skypack.dev/solid-js";
 
 class SignalElement extends HTMLElement {
-  constructor() {
-    super();
-  }
   connectedCallback() {
     const [getter, setter] = createSignal(this.getAttribute("init"));
 

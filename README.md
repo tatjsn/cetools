@@ -10,6 +10,7 @@ A wrapper of Solid.js to provide reactivity across elements via signals.
 
 ```html
 <!-- initial values are meant to be rendered by server -->
+<!-- add autocomplete="false" to prevent conflict when reload -->
 <div id="controlId">
   <input type="radio" name="tabs" value="foo" checked id="foo" />
   <label for="foo">Foo</label>
