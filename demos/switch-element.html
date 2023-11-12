@@ -1,27 +1,9 @@
 <style>
-  pen-switch:not(:defined) {
+  ce-switch:not(:defined) {
     display: none;
   }
 </style>
-<script type="module">
-  import ReactiveElement from "../reactive-element.js";
-  import h from "../h.js";
-
-  export class SwitchElement extends ReactiveElement {
-    static properties = {
-      query: "default value",
-    };
-
-    constructor() {
-      super();
-    }
-
-    render() {
-      return h.div(h.slot({ name: this.query }, "This is fallback"));
-    }
-  }
-  customElements.define("pen-switch", SwitchElement);
-</script>
+<script type="module" src="../switch-element.js"></script>
 <script type="module" src="../signal.js"></script>
 
 <div id="controlId">
@@ -38,7 +20,7 @@
   <label for="bar">Bar</label>
 </div>
 
-<pen-switch id="switchId" query="foo">
+<ce-switch id="switchId" query="foo">
   <ul slot="foo">
     <li>Foo content</li>
     <li>Foo content</li>
@@ -53,9 +35,7 @@
     <li>Bar content</li>
     <li>Bar content</li>
   </ul>
-</pen-switch>
-
-<!-- code below are non-presentation -->
+</ce-switch>
 
 <ce-signal init="foo">
   <ce-listener
