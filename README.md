@@ -6,7 +6,7 @@ A collection of Custom Elements related utilities for building webapp without bu
 
 ### signal.js
 
-A wrapper of Solid.js to provide reactivity across elements via signals.
+A wrapper of Preact Signals to provide reactivity across elements via signals.
 
 ```html
 <!-- initial values are meant to be rendered by server -->

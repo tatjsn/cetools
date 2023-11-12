@@ -1,8 +1,11 @@
-import { createSignal, createEffect } from "https://cdn.skypack.dev/solid-js";
+import {
+  signal,
+  effect,
+} from "https://unpkg.com/@preact/signals-core@1.5.0/dist/signals-core.module.js";
 
 class SignalElement extends HTMLElement {
   connectedCallback() {
-    const [getter, setter] = createSignal(this.getAttribute("init"));
+    const sig = signal(this.getAttribute("init"));
 
     const listeners = this.querySelectorAll("ce-listener");
     for (const listener of listeners) {
@@ -13,13 +16,13 @@ class SignalElement extends HTMLElement {
       const property = listener.getAttribute("property");
       document.getElementById(forAttr).addEventListener(event, (event) => {
         const subject = hasTarget ? event.target : event;
-        setter(subject[property]);
+        sig.value = subject[property];
       });
     }
 
     const observers = this.querySelectorAll("ce-observer");
-    createEffect(() => {
-      const updatedValue = getter();
+    effect(() => {
+      const updatedValue = sig.value;
       for (const observer of observers) {
         const forAttr = observer.getAttribute("for");
         const subject = document.getElementById(forAttr);
