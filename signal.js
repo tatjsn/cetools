@@ -4,6 +4,8 @@ import {
 } from "https://unpkg.com/@preact/signals-core@1.5.0/dist/signals-core.module.js";
 
 class SignalElement extends HTMLElement {
+  #dispose;
+
   connectedCallback() {
     const sig = signal(this.getAttribute("init"));
 
@@ -17,11 +19,18 @@ class SignalElement extends HTMLElement {
       document.getElementById(forAttr).addEventListener(event, (event) => {
         const subject = hasTarget ? event.target : event;
         sig.value = subject[property];
+
+        if (!this.#dispose) {
+          const observers = this.querySelectorAll("ce-observer");
+          this.#dispose = this.#registerEffect(sig);
+        }
       });
     }
+  }
 
+  #registerEffect(sig) {
     const observers = this.querySelectorAll("ce-observer");
-    effect(() => {
+    return effect(() => {
       const updatedValue = sig.value;
       for (const observer of observers) {
         const forAttr = observer.getAttribute("for");
