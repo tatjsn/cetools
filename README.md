@@ -39,17 +39,23 @@ Data fetching and page patial replacement.
 
 ```html
 <ce-partial for="target">
-  <form id="hoge">
-    <input type="hidden" name="key1" value="value1" />
-    <input type="hidden" name="key2" value="value2" />
-    <!-- Following key-value will be added by ce-fragment -->
-    <!-- <input type="hidden" name="partial" value="target" /> -->
+  <form id="theForm">
+    <input id="inputBox" type="text" name="query" autocomplete="off" />
   </form>
 </ce-partial>
-
-<button type="submit" form="hoge">
-  <div id="target">results</div>
-</button>
+<ul id="target">
+  <!-- Content will be replaced with server response -->
+</ul>
+<ce-signal init="">
+  <ce-listener
+    for="theForm"
+    event="keyup"
+    property="value"
+    target
+    debounce
+  ></ce-listener>
+  <ce-observer for="theForm" action="requestSubmit" void></ce-observer>
+</ce-signal>
 ```
 
 ### h.js
