@@ -10,7 +10,7 @@ A wrapper of Preact Signals to provide reactivity across elements via signals.
 
 ```html
 <!-- initial values are meant to be rendered by server -->
-<!-- add autocomplete="false" to prevent conflict when reload -->
+<!-- add autocomplete="off" to prevent conflict when reload -->
 <div id="controlId">
   <input type="radio" name="tabs" value="foo" checked id="foo" />
   <label for="foo">Foo</label>
@@ -33,21 +33,19 @@ A wrapper of Preact Signals to provide reactivity across elements via signals.
 </ce-signal>
 ```
 
-### rpc.js
+### partial.js
 
-Data fetching and page fragment replacement.
+Data fetching and page patial replacement.
 
 ```html
-<ce-rpc for="target">
+<ce-partial for="target">
   <form id="hoge">
     <input type="hidden" name="key1" value="value1" />
     <input type="hidden" name="key2" value="value2" />
-    <!-- should this be explicit? -->
-    <!-- as it can be injected by ce-rpc -->
-    <!-- but must be configurable -->
-    <input type="hidden" name="fragment" value="target" />
+    <!-- Following key-value will be added by ce-fragment -->
+    <!-- <input type="hidden" name="partial" value="target" /> -->
   </form>
-</ce-rpc>
+</ce-partial>
 
 <button type="submit" form="hoge">
   <div id="target">results</div>
